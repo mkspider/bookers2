@@ -1,0 +1,17 @@
+<%= notice %>
+<%= render 'books/list', user: @user, book: @book %>
+
+<% @books.each do |book| %>
+<div>
+  <%= link_to user_path(book.user.id) do %>
+  <p><%= image_tag book.user.get_profile_image(100,100) %></p>
+  <% end %>
+  <%= link_to book_path(book.id) do %>
+  <p>Title: <%=book.title %></p>
+  <p>Opinion: <%=book.body %></p>
+  <% end %>
+
+</div>
+<% end %>
+
+

@@ -1,0 +1,14 @@
+<%= render 'books/list', user: @user, book: @book %>
+<h2>Books</h2>
+
+
+<!-- ユーザーの投稿一覧 -->
+<% @books.each do |book| %>
+
+<div>
+  <%= link_to book_path(book.id) do %>
+  <% end %>
+  <th>Title：<%= book.title %></th>
+  <th>Opnion：<%= book.body %></p>
+</div>
+<% end %>
