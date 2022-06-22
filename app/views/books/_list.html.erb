@@ -1,16 +1,27 @@
   <%= notice %>
- <h2>User info</h2>
- <%= image_tag user.get_profile_image(100,100) %>
- <p>name: <%=user.name %></p>
- <p>introduction <%=user.introduction %></p>
- <a href="/users/<%=user.id %>/edit">Edit</a>
-
-
-<h1>New book</h1>
-  <%= form_with model: book, url:'/books', method: :post do |f| %>
-    <h4>Title</h4>
-      <%= f.text_field :title %>
-    <h4>Opinion</h4>
-      <%= f.text_area :body %>
-    <%= f.submit 'Create Book' %>
-  <% end %>
+  <h2>User info</h2>
+  <%= image_tag user.get_profile_image(100,100) %>
+    <table class="table">
+      <tbody>
+        <tr></tr>
+        <tr>
+          <th>name</th>
+          <th>
+            <%=user.name %>
+          </th>
+        </tr>
+        <tr>
+          <th>introduction
+            <%=user.introduction %>
+          </th>
+          <th></th>
+        </tr>
+      </tbody>
+    </table>
+    <%= link_to edit_user_path(user.id), class: 'btn btn-outline-secondary btn-block' do %> <i class="fas fa-user-cog"></i>
+      <% end %>
+        <h2>New book</h2>
+        <%= form_with model: book, url:'/books', method: :post do |f| %>
+          <div class="form-group"> <label for="book_title">Title</label> <input class="form-control book_title" type="text" name="book[title]" id="book_title"> </div>
+          <div class="form-group"> <label for="book_opinion">Opinion</label> <textarea class="form-control book_body" name="book[body]" id="book_body"></textarea> </div> <input type="submit" name="commit" value="Create Book" class="btn btn-success" data-disable-with="Create Book">
+          <% end %>

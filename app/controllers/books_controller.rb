@@ -10,7 +10,7 @@ class BooksController < ApplicationController
     @book.user_id = current_user.id
 
     if @book.save
-      redirect_to '/books', notice:"Book was successfully created."
+      redirect_to book_path(@book.id), notice:"Book was successfully created."
     else
       flash.now[:danger] = "登録に失敗しました"
       render :new

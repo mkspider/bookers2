@@ -1,13 +1,34 @@
 <%= notice %>
 <%= render 'books/list', user: @user, book: @book_new %>
-<div>
-  <p> <%= image_tag @user.get_profile_image(100,100) %></p>
-  <p>ユーザーネーム：<%= @user.name %></p>
-  <p>Title：<%= @book.title %></p>
-  <p>body：<%= @book.body %></p>
-  <% if @user.id == current_user.id %>
-   <%= link_to "Edit", edit_book_path(@book.id) %>
-   <%= link_to "Destroy", book_path(@book.id),method: :delete %>
+
+<div class ="col-md-8 offset-md-1">
+<h2>Book detail</h2>
+<table class ="table table-hover table-inverse">
+
+ <% @books.each do |book| %>
+      <tr>
+        <td>
+          <%= link_to user_path(book.user.id) do %>
+            <p><%= image_tag book.user.get_profile_image(100,100) %></p>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to book.title, book_path(book.id) %>
+        </td>
+        <td>
+          <%=link_to book.body, book_path(book.id) %>
+        </td>
+        <td>
+          <%= link_to "Edit", edit_book_path(@book.id), class: 'btn btn-sm btn-success' %>
+        </td>
+        <td>
+          <%= link_to "Destroy", book_path(@book.id),method: :delete, "data-confirm" => "Are you sure?", class: 'btn btn-sm btn-danger ' %>
+        </td>
+      </tr>
     <% end %>
+  </tbody>
+</table>
+</div>
+
 
 </div>
