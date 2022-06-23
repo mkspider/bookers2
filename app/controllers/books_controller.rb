@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action:authenticate_user!
   before_action :ensure_correct_user, only: [:edit, :update]
 
   def new
@@ -12,9 +13,11 @@ class BooksController < ApplicationController
     if @book.save
       redirect_to book_path(@book.id), notice:"Book was successfully created."
     else
-      flash.now[:danger] = "登録に失敗しました"
-      render :new
-  end
+      flash.now[:danger] = "error"
+       @books = Book.all
+       @user = current_user
+      render :index
+    end
   end
 
   def index
@@ -64,7 +67,7 @@ class BooksController < ApplicationController
    def ensure_correct_user
    @book = Book.find(params[:id])
    unless @book.user == current_user
-   redirect_to book_path
+   redirect_to books_path
    end
    end
 end

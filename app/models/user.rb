@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :books, dependent: :destroy
 
+  validates :name, uniqueness: true
   validates :name, presence: true, length: {minimum: 2,maximum: 20}
   validates :introduction, length: {maximum: 50}
 
@@ -17,5 +18,5 @@ def get_profile_image(width,height)
       profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
     profile_image.variant(resize_to_limit: [100, 100]).processed
-  end
+end
 end

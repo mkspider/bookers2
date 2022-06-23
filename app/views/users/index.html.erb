@@ -1,4 +1,6 @@
+<main>
 <%= notice %>
+<div class ="container">
   <div class="row">
     <div class="col-md-3">
     <%= render 'books/list', user: @user, book: @book %>
@@ -29,7 +31,7 @@
                 <%= link_to user.name, user_path(user.id) %>
               </td>
               <td>
-                 <%= link_to 'Show', "/users/#{@user.id}" %>
+                 <%= link_to 'Show', "/users/#{user.id}" %>
               </td>
             </tr>
              <% end %>
@@ -37,3 +39,5 @@
       </table>
     </div>
   </div>
+  </div>
+  </main>
